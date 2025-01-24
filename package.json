@@ -23,5 +23,9 @@
 		"typescript": "^5.0.0",
 		"vite": "^6.0.0",
 		"vitest": "^3.0.4"
+	},
+	"dependencies": {
+		"jsonwebtoken": "^9.0.2",
+		"mongodb": "^6.12.0"
 	}
 }
