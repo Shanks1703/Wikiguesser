@@ -25,6 +25,7 @@
 		"vitest": "^3.0.4"
 	},
 	"dependencies": {
+		"@types/jsonwebtoken": "^9.0.8",
 		"jsonwebtoken": "^9.0.2",
 		"mongodb": "^6.12.0"
 	}
