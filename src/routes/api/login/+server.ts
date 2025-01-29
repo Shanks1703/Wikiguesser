@@ -11,9 +11,8 @@ export async function POST({ request, cookies }: RequestEvent): Promise<Response
     const password = data.get("password") as string;
     const user: User | null = await collection.findOne<User>({ email, password });
 
-    if (!user) {
-        error(401);
-    }
+    if (!user)
+        error(401, "Invalid email or password");
 
     cookies.set("auth", createToken(email), {
         path: "/",

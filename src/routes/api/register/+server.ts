@@ -11,29 +11,26 @@ export async function POST({ request, cookies }: RequestEvent): Promise<Response
     const password = data.get("password") as string;
     const passwordRepeat = data.get("password-repeat") as string;
 
-    if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)){
+    if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/))
         error(400, "Invalid email");
-    }
 
-    if (password !== passwordRepeat) {
+    if (password !== passwordRepeat)
         error(400, "Passwords do not match");
-    }
 
     let user: User | null = await collection.findOne<User>({ email });
-
-    if (user) {
-        error(409, "User already exists");
-    }
+    console.log(user);
+    if (user)
+        error(409, "Email is already in use");
 
     user = {
         email,
         password
     };
+
     const result = await collection.insertOne(user);
 
-    if (!result.insertedId) {
+    if (!result.insertedId)
         error(400, "Failed to create user");
-    }
 
     cookies.set("auth", createToken(email), {
         path: "/",
