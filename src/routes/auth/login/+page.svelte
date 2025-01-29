@@ -4,6 +4,8 @@
     let email: string;
     let password: string;
 
+    let error: { message: string };
+
     async function login() {
         const data = new FormData();
         data.append("email", email);
@@ -14,19 +16,31 @@
             body: data
         });
 
-        if (response.ok) {
+        if (response.ok)
             await goto("/");
-        }
+        else
+            error = await response.json();
     }
 </script>
 
-<h1>Login</h1>
-<form on:submit|preventDefault={login}>
-    <!--{#if form?.status !== 200}-->
-    <!--    <p>{form?.message}</p>-->
-    <!--{/if}-->
+<form on:submit|preventDefault={login} class="auth-form">
+    {#if error}
+        <p>{error?.message}</p>
+    {/if}
     <input type="email" id="email" placeholder="Email" bind:value={email} >
     <input type="password" id="password" placeholder="Password" bind:value={password} >
     <button type="submit">Login</button>
-    <a href="/auth/register">Register</a>
+    <span>Don't have an account ? <a href="/auth/register">Register</a></span>
 </form>
+
+<style lang="scss">
+    @use "/src/app";
+
+    p {
+        color: red;
+    }
+
+    span {
+        color: var(--text);
+    }
+</style>

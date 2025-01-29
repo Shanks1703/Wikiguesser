@@ -9,10 +9,13 @@ await connect().then(() => {
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
-    if (event.url.pathname.startsWith("/") && !event.url.pathname.startsWith("/auth") && !event.url.pathname.startsWith("/api")) {
-        if (!verifyToken(event.cookies.get("auth") as string))
+    if (!verifyToken(event.cookies.get("auth") as string)){
+        if (event.url.pathname.startsWith("/") && !event.url.pathname.startsWith("/auth") && !event.url.pathname.startsWith("/api"))
             throw redirect(303, "/auth/login");
     }
+    else
+        if (event.url.pathname.startsWith("/auth"))
+            throw redirect(303, "/");
 
     return resolve(event);
 };
