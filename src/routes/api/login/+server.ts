@@ -17,7 +17,7 @@ export async function POST({ request, cookies }: RequestEvent): Promise<Response
     cookies.set("auth", createToken(email), {
         path: "/",
         maxAge: 60 * 60 * 24 * 15,
-    })
+    });
 
     return new Response(null, { status: 200 });
 }

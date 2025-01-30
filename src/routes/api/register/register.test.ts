@@ -1,5 +1,5 @@
 import { POST } from './+server';
-import { describe, test, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import type {HttpError} from "@sveltejs/kit";
 import {database} from "$lib/database/database";
 
@@ -37,7 +37,7 @@ describe("POST /register", () => {
         };
     });
 
-    test("Should return 400 for invalid email", async () => {
+    it("Should return 400 for invalid email", async () => {
         const formData = new FormData();
         formData.append("email", "invalid-email");
         formData.append("password", "password");
@@ -52,7 +52,7 @@ describe("POST /register", () => {
         }
     });
 
-    test("Should return 400 if passwords do not match", async () => {
+    it("Should return 400 if passwords do not match", async () => {
         const formData = new FormData();
         formData.append("email", "test@test.com");
         formData.append("password", "password1");
@@ -67,7 +67,7 @@ describe("POST /register", () => {
         }
     });
 
-    test("Should return 409 if email is already in use", async () => {
+    it("Should return 409 if email is already in use", async () => {
         const formData = new FormData();
         formData.append("email", "test@test.com");
         formData.append("password", "password");
@@ -83,7 +83,7 @@ describe("POST /register", () => {
         }
     });
 
-    test("Should return 400 if user creation fails", async () => {
+    it("Should return 400 if user creation fails", async () => {
         const formData = new FormData();
         formData.append("email", "test@test.com");
         formData.append("password", "password");
@@ -100,7 +100,7 @@ describe("POST /register", () => {
         }
     });
 
-    test("Should return 201 and set auth cookie for successful registration", async () => {
+    it("Should return 201 and set auth cookie for successful registration", async () => {
         const formData = new FormData();
         formData.append("email", "test@test.com");
         formData.append("password", "password");

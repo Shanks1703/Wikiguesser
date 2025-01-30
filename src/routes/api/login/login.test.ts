@@ -1,5 +1,5 @@
 import { POST } from './+server';
-import { describe, test, expect, vi, beforeEach } from "vitest";
+import {describe, expect, vi, beforeEach, it} from "vitest";
 import { database } from "$lib/database/database";
 import type {HttpError} from "@sveltejs/kit";
 
@@ -35,7 +35,7 @@ describe("POST /login", () => {
         };
     });
 
-    test("Should return 200 and set auth cookie for valid credentials", async () => {
+    it("Should return 200 and set auth cookie for valid credentials", async () => {
         const formData = new FormData();
         formData.append("email", "test@test.com");
         formData.append("password", "password");
@@ -53,7 +53,7 @@ describe("POST /login", () => {
         );
     });
 
-    test("Should return 401 for invalid credentials", async () => {
+    it("Should return 401 for invalid credentials", async () => {
         const formData = new FormData();
         formData.append("email", "test@test.com");
         formData.append("password", "password");
