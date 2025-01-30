@@ -27,15 +27,13 @@
     {#if error}
         <p>{error?.message}</p>
     {/if}
-    <input type="email" id="email" placeholder="Email" bind:value={email} >
-    <input type="password" id="password" placeholder="Password" bind:value={password} >
+    <input type="email" class="input" id="email" placeholder="Email" bind:value={email} >
+    <input type="password" class="input" id="password" placeholder="Password" bind:value={password} >
     <button type="submit">Login</button>
     <span>Don't have an account ? <a href="/auth/register">Register</a></span>
 </form>
 
 <style lang="scss">
-    @use "/src/app";
-
     p {
         color: red;
     }
