@@ -54,9 +54,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo "MONGO_USERNAME=${{ secrets.MONGO_USERNAME }}" >> .env
-          echo "MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }}" >> .env
           docker build -t ${{ secrets.DOCKER_REPOSITORY }}/wikiguesser:${{ env.tag }} .
+          docker build -t ${{ secrets.DOCKER_REPOSITORY }}/wikiguesser:latest .
 
       - name: Run Docker container
         run: docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPOSITORY }}/wikiguesser:${{ env.tag }}
@@ -68,4 +67,6 @@ jobs:
         run: curl -f http://localhost:8080
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_REPOSITORY }}/wikiguesser:${{ env.tag }}
+        run: |
+          docker push ${{ secrets.DOCKER_REPOSITORY }}/wikiguesser:${{ env.tag }}
+          docker push ${{ secrets.DOCKER_REPOSITORY }}/wikiguesser:latest
