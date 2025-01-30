@@ -18,7 +18,7 @@
     }
 </script>
 
-<div class="container">
+<div class="top">
     <div class="invisible"></div>
     <img src="/logo.svg" alt="">
 
@@ -29,7 +29,9 @@
     {/if}
 </div>
 
-{@render children()}
+<div class="content">
+    {@render children()}
+</div>
 
 <style lang="scss">
     .invisible {
@@ -37,7 +39,7 @@
       background-color: transparent;
     }
 
-    .container {
+    .top {
       display: flex;
       justify-content: space-between;
       padding: 0 15px;
@@ -50,5 +52,16 @@
       width: 150px;
       margin-top: auto;
       margin-bottom: auto;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      width: 33%;
+      height: 85%;
+      max-width: 400px;
     }
 </style>
